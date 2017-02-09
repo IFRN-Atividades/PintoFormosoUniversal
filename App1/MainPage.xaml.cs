@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,8 @@ namespace App1
     public sealed partial class MainPage : Page
     {
         public string ip = "http://10.21.0.137";
+        public List<Models.Estado> ListaEstados = new List<Models.Estado>();
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -39,18 +42,53 @@ namespace App1
             var str = response.Content.ReadAsStringAsync().Result;
             List<Models.Estado> obj = JsonConvert.DeserializeObject<List<Models.Estado>>(str);
             lstEstados.ItemsSource = obj;
+            ListaEstados = obj;
+            populateEstado();
         }
 
-
-        private void btnListarCidades_Click(object sender, RoutedEventArgs e)
+        public async void getCidades()
         {
-
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(ip);
+            var response = await httpClient.GetAsync("/20131011110142/api/cidade");
+            var str = response.Content.ReadAsStringAsync().Result;
+            List<Models.Cidade> obj = JsonConvert.DeserializeObject<List<Models.Cidade>>(str);
+            lstCidades.ItemsSource = obj;
         }
 
-        private void btnInserirVeic_Click(object sender, RoutedEventArgs e)
+
+        private async void btnListarCidades_Click(object sender, RoutedEventArgs e)
         {
-
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(ip);
+            var response = await httpClient.GetAsync("/20131011110142/api/cidade");
+            var str = response.Content.ReadAsStringAsync().Result;
+            List<Models.Cidade> obj = JsonConvert.DeserializeObject<List<Models.Cidade>>(str);
+            lstCidades.ItemsSource = obj;
         }
 
+        private async void btnInserirVeic_Click(object sender, RoutedEventArgs e)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(ip);
+            Models.Cidade c = new Models.Cidade
+            {
+                Nome = txtNomeCidade.Text,
+                IdEstado = (int)cmbEstado.SelectedValue
+            };
+            
+            string s = JsonConvert.SerializeObject(c);
+            var content = new StringContent(s, Encoding.UTF8, "application/json");
+            await httpClient.PostAsync("/20131011110142/api/cidade", content);
+            getCidades();
+        }
+
+        public void populateEstado()
+        {
+            cmbEstado.ItemsSource = null;
+            cmbEstado.ItemsSource = ListaEstados;
+            cmbEstado.SelectedValuePath = "Id";
+            cmbEstado.DisplayMemberPath = "Nome";
+        }
     }
 }

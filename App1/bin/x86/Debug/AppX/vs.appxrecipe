@@ -28,13 +28,13 @@
     <AppXManifest Include="C:\Users\Nudes\Documents\Visual Studio 2015\Projects\PintoFormoso\App1\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-02-09T13:31:02.736</Modified>
+      <Modified>2017-02-09T14:12:49.284</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Nudes\Documents\Visual Studio 2015\Projects\PintoFormoso\App1\bin\x86\Debug\App1.exe">
       <PackagePath>entrypoint\App1.exe</PackagePath>
-      <Modified>2017-02-09T13:31:01.343</Modified>
+      <Modified>2017-02-09T14:12:48.999</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nudes\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -501,11 +501,11 @@
     <AppxPackagedFile Include="C:\Users\Nudes\Documents\Visual Studio 2015\Projects\PintoFormoso\App1\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-02-09T13:24:33.633</Modified>
+      <Modified>2017-02-09T13:47:27.806</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nudes\Documents\Visual Studio 2015\Projects\PintoFormoso\App1\bin\x86\Debug\Core\App1.exe">
       <PackagePath>App1.exe</PackagePath>
-      <Modified>2017-02-09T13:31:02.727</Modified>
+      <Modified>2017-02-09T14:12:49.280</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

@@ -13,7 +13,6 @@
                 <Grid>
                     <ListBox x:Name="lstEstados" Margin="0,47,0,10">
                     </ListBox>
-                    <Button x:Name="btnListEstados" Content="Listar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="btnListEstados_Click" Width="980"/>
                 </Grid>
             </PivotItem>
             <PivotItem Header="Cidades">
@@ -22,7 +21,7 @@
                     <ComboBox x:Name="cmbEstado" HorizontalAlignment="Left" VerticalAlignment="Top" Width="215" Margin="206,0,0,0" DisplayMemberPath="Sigla" SelectedValuePath="id" />
 
                     <Button x:Name="btnInserirVeic" Content="Inserir" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="426,4,0,0" Width="120" Height="28" Click="btnInserirVeic_Click"/>
-                    <ListBox x:Name="lstVeic" Margin="0,63,0,0">
+                    <ListBox x:Name="lstCidades" Margin="0,63,0,0">
 
                     </ListBox>
                     <Button x:Name="btnListarCidades" Content="Listar" HorizontalAlignment="Left" Margin="865,0,0,0" VerticalAlignment="Top" Click="btnListarCidades_Click" />
