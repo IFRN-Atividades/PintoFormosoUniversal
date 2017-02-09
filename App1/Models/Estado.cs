@@ -8,8 +8,13 @@ namespace App1.Models
 {
     public class Estado
     {
-        private int Id { get; set; }
-        private string Nome { get; set; }
-        private string Sigla { get; set; }
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Sigla { get; set; }
+
+        public override string ToString()
+        {
+            return this.Nome + " - " + this.Sigla;
+        }
     }
 }

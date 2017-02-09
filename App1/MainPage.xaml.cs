@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -26,12 +28,19 @@ namespace App1
         public MainPage()
         {
             this.InitializeComponent();
+            getEstados();
         }
 
-        private void btnListEstados_Click(object sender, RoutedEventArgs e)
+        private async void getEstados()
         {
-
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(ip);
+            var response = await httpClient.GetAsync("/20131011110142/api/estado");
+            var str = response.Content.ReadAsStringAsync().Result;
+            List<Models.Estado> obj = JsonConvert.DeserializeObject<List<Models.Estado>>(str);
+            lstEstados.ItemsSource = obj;
         }
+
 
         private void btnListarCidades_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +52,5 @@ namespace App1
 
         }
 
-        public List
     }
 }
