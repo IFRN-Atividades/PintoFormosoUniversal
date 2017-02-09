@@ -8,7 +8,7 @@ namespace App1.Models
 {
     public class Cidade
     {
-        private int Id { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public int IdEstado { get; set; }
 

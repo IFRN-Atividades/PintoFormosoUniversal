@@ -21,10 +21,13 @@
                     <ComboBox x:Name="cmbEstado" HorizontalAlignment="Left" VerticalAlignment="Top" Width="215" Margin="206,0,0,0" DisplayMemberPath="Sigla" SelectedValuePath="id" />
 
                     <Button x:Name="btnInserirVeic" Content="Inserir" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="426,4,0,0" Width="120" Height="28" Click="btnInserirVeic_Click"/>
-                    <ListBox x:Name="lstCidades" Margin="0,63,0,0">
+                    <Button x:Name="btnEditarCidade" Content="Editar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="551,5,0,0" Width="120" Height="28" Click="btnEditarCidade_Click"/>
+                    <Button x:Name="btnExcluirCidade" Content="Excluir" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="676,5,0,0" Width="120" Height="28" Click="btnExcluirCidade_Click" />
+
+                    <ListBox x:Name="lstCidades" Margin="0,63,0,0" SelectionChanged="lstCidades_SelectionChanged">
 
                     </ListBox>
-                    <Button x:Name="btnListarCidades" Content="Listar" HorizontalAlignment="Left" Margin="865,0,0,0" VerticalAlignment="Top" Click="btnListarCidades_Click" />
+                    <Button x:Name="btnListarCidades" Content="Listar" HorizontalAlignment="Left" Margin="801,0,0,0" VerticalAlignment="Top" Click="btnListarCidades_Click" />
 
                 </Grid>
             </PivotItem>

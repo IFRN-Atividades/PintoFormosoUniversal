@@ -50,6 +50,7 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
       <RootProperty Name="Margin" />
+      <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="App1.MainPage" />
   </Roots.RootTypes>

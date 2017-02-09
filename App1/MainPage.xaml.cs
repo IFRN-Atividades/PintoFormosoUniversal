@@ -53,7 +53,11 @@ namespace App1
             var response = await httpClient.GetAsync("/20131011110142/api/cidade");
             var str = response.Content.ReadAsStringAsync().Result;
             List<Models.Cidade> obj = JsonConvert.DeserializeObject<List<Models.Cidade>>(str);
-            lstCidades.ItemsSource = obj;
+            var result = from Models.Cidade c in obj
+                         join Models.Estado e in ListaEstados
+                         on c.IdEstado equals e.Id
+                         select c.comEstado(e);
+            lstCidades.ItemsSource = result;
         }
 
 
@@ -64,7 +68,11 @@ namespace App1
             var response = await httpClient.GetAsync("/20131011110142/api/cidade");
             var str = response.Content.ReadAsStringAsync().Result;
             List<Models.Cidade> obj = JsonConvert.DeserializeObject<List<Models.Cidade>>(str);
-            lstCidades.ItemsSource = obj;
+            var result = from Models.Cidade c in obj
+                         join Models.Estado k in ListaEstados
+                         on c.IdEstado equals k.Id
+                         select c.comEstado(k);
+            lstCidades.ItemsSource = result;
         }
 
         private async void btnInserirVeic_Click(object sender, RoutedEventArgs e)
@@ -89,6 +97,51 @@ namespace App1
             cmbEstado.ItemsSource = ListaEstados;
             cmbEstado.SelectedValuePath = "Id";
             cmbEstado.DisplayMemberPath = "Nome";
+        }
+
+        private int IdCidade;
+
+        private void lstCidades_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var curItem = (Models.Cidade)lstCidades.SelectedItem;
+                txtNomeCidade.Text = curItem.Nome;
+                cmbEstado.SelectedValue = curItem.IdEstado;
+                IdCidade = curItem.Id;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private async void btnEditarCidade_Click(object sender, RoutedEventArgs e)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(ip);
+
+            var response = await httpClient.GetAsync("/20131011110142/api/cidade");
+            var str = response.Content.ReadAsStringAsync().Result;
+            List<Models.Cidade> obj = JsonConvert.DeserializeObject<List<Models.Cidade>>(str);
+            Models.Cidade item = (from Models.Cidade f in obj where f.Id == IdCidade select f).Single();
+
+            item.Nome = txtNomeCidade.Text;
+            item.IdEstado = (int)cmbEstado.SelectedValue;
+
+            var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, "application/json");
+            await httpClient.PutAsync("/20131011110142/api/cidade/" + item.Id, content);
+
+            IdCidade = 0;
+            lstCidades.SelectedIndex = -1;
+            getCidades();
+        }
+
+        private async void btnExcluirCidade_Click(object sender, RoutedEventArgs e)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(ip);
+            await httpClient.DeleteAsync("/20131011110142/api/cidade/" + IdCidade);
         }
     }
 }
