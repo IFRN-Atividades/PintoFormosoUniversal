@@ -5,9 +5,13 @@
     xmlns:local="using:App1"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Width="889.6">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,9.6,0">
+        <TextBox x:Name="txtUsuarioLogin" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="345" Margin="245,246,0,0" PlaceholderText="Usuário"/>
+        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="245,283,0,0" VerticalAlignment="Top" Width="345" PlaceholderText="Senha"/>
+        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="245,323,0,0" VerticalAlignment="Top" Width="345" Click="btnLogin_Click"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="241,91,0,0" TextWrapping="Wrap" Text="Página de Login" VerticalAlignment="Top" Height="68" Width="365" FontSize="48"/>
 
     </Grid>
 </Page>

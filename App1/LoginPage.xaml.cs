@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -25,6 +27,41 @@ namespace App1
         public LoginPage()
         {
             this.InitializeComponent();
+            getUsuarios();
+        }
+
+        public string ip = "http://10.21.0.137";
+        List<Models.Usuario> lista;
+
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        public async void getUsuarios()
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(ip);
+            var response = await httpClient.GetAsync("/20131011110142/api/usuario");
+            var str = response.Content.ReadAsStringAsync().Result;
+            List<Models.Usuario> obj = JsonConvert.DeserializeObject<List<Models.Usuario>>(str);
+            lista = obj;
+        }
+
+        public bool verificarLogin(string usuario, string s)
+        {
+            if (lista.Any(c => c.Nome == usuario))
+            {
+                Models.Usuario u = lista.Find(c => c.Nome.Contains(usuario));
+                if (u.Senha == passwordBox.Password.ToString())
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+
         }
     }
 }
