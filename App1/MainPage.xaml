@@ -28,10 +28,25 @@
 
                     </ListBox>
                     <Button x:Name="btnListarCidades" Content="Listar" HorizontalAlignment="Left" Margin="801,0,0,0" VerticalAlignment="Top" Click="btnListarCidades_Click" />
-
                 </Grid>
             </PivotItem>
-           
+            <PivotItem Header="Usuários">
+                <Grid>
+                    <TextBox x:Name="txtNomeUsuario" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top" Width="201"/>
+                    <TextBox x:Name="txtSenhaUsuario" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Senha" VerticalAlignment="Top" Width="201" Margin="204,0,0,0"/>
+
+
+                    <Button x:Name="btnInserirUsuario" Content="Inserir" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="409,0,0,0" Width="120" Height="32" Click="btnInserirUsuario_Click" />
+                    <Button x:Name="btnEditarUsuario" Content="Editar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="537,1,0,0" Width="120" Height="31" Click="btnEditarUsuario_Click" />
+                    <Button x:Name="BtnExcluirUsuario" Content="Excluir" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="664,1,0,0" Width="120" Height="31" Click="BtnExcluirUsuario_Click" />
+
+                    <ListBox x:Name="lstUsuarios" Margin="0,63,0,0" SelectionChanged="lstUsuarios_SelectionChanged">
+
+                    </ListBox>
+                    <Button x:Name="btnListarUsuarios" Content="Listar" HorizontalAlignment="Left" Margin="795,1,0,0" VerticalAlignment="Top" Width="98" Height="31" Click="btnListarUsuarios_Click" />
+                </Grid>
+            </PivotItem>
+
         </Pivot>
     </Grid>
 </Page>

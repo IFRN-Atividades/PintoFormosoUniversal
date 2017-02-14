@@ -32,6 +32,8 @@ namespace App1
         {
             this.InitializeComponent();
             getEstados();
+            getCidades();
+            getUsuários();
         }
 
         private async void getEstados()
@@ -142,6 +144,82 @@ namespace App1
             HttpClient httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(ip);
             await httpClient.DeleteAsync("/20131011110142/api/cidade/" + IdCidade);
+        }
+
+        private async void btnListarUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            getUsuários();
+        }
+
+        private async void btnInserirUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(ip);
+            Models.Usuario u = new Models.Usuario
+            {
+                Nome = txtNomeUsuario.Text,
+                Senha = txtSenhaUsuario.Text
+            };
+            string s = JsonConvert.SerializeObject(u);
+            var content = new StringContent(s, Encoding.UTF8, "application/json");
+            await httpClient.PostAsync("/20131011110142/api/usuario", content);
+            getUsuários();
+        }
+
+        public async void getUsuários()
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(ip);
+            var response = await httpClient.GetAsync("/20131011110142/api/usuario");
+            var str = response.Content.ReadAsStringAsync().Result;
+            List<Models.Usuario> obj = JsonConvert.DeserializeObject<List<Models.Usuario>>(str);
+            lstUsuarios.ItemsSource = obj;
+        }
+
+        public int IdUsuario;
+
+        private async void btnEditarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(ip);
+
+            var response = await httpClient.GetAsync("/20131011110142/api/usuario");
+            var str = response.Content.ReadAsStringAsync().Result;
+            List<Models.Usuario> obj = JsonConvert.DeserializeObject<List<Models.Usuario>>(str);
+            Models.Usuario item = (from Models.Usuario f in obj where f.Id == IdUsuario select f).Single();
+
+            item.Nome = txtNomeUsuario.Text;
+            item.Senha = txtSenhaUsuario.Text;
+
+            var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, "application/json");
+            await httpClient.PutAsync("/20131011110142/api/usuario/" + item.Id, content);
+
+            IdUsuario = 0;
+            lstUsuarios.SelectedIndex = -1;
+            getUsuários();
+        }
+
+        private void lstUsuarios_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var curItem = (Models.Usuario)lstUsuarios.SelectedItem;
+                txtNomeUsuario.Text = curItem.Nome;
+                txtSenhaUsuario.Text = curItem.Senha;
+                IdUsuario = curItem.Id;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private async void BtnExcluirUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(ip);
+            await httpClient.DeleteAsync("/20131011110142/api/usuario/" + IdUsuario);
+            getUsuários();
         }
     }
 }
