@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -36,7 +37,7 @@ namespace App1
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            
+            verificarLogin(txtUsuarioLogin.Text, passwordBox.Password.ToString());
         }
 
         public async void getUsuarios()
@@ -49,18 +50,27 @@ namespace App1
             lista = obj;
         }
 
-        public bool verificarLogin(string usuario, string s)
+        public async void verificarLogin(string usuario, string s)
         {
             if (lista.Any(c => c.Nome == usuario))
             {
                 Models.Usuario u = lista.Find(c => c.Nome.Contains(usuario));
                 if (u.Senha == passwordBox.Password.ToString())
-                    return true;
+                {
+                    this.Frame.Navigate(typeof(MainPage));
+                }
                 else
-                    return false;
+                {
+                    var dialog = new MessageDialog("Errou a senha, parceiro(a)");
+                    await dialog.ShowAsync();
+                }
+                
             }
             else
-                return false;
+            {
+                var dialog = new MessageDialog("Não existe esse usuário, parceiro(a)");
+                await dialog.ShowAsync();
+            }
 
         }
     }
