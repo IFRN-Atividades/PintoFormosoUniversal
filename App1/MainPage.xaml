@@ -33,7 +33,7 @@
             <PivotItem Header="Usuários">
                 <Grid>
                     <TextBox x:Name="txtNomeUsuario" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top" Width="201"/>
-                    <TextBox x:Name="txtSenhaUsuario" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Senha" VerticalAlignment="Top" Width="201" Margin="204,0,0,0"/>
+                    <PasswordBox x:Name="txtSenhaUsuario" HorizontalAlignment="Left" Margin="204,0,0,0" VerticalAlignment="Top" Width="203" PlaceholderText="Senha"/>
 
 
                     <Button x:Name="btnInserirUsuario" Content="Inserir" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="409,0,0,0" Width="120" Height="32" Click="btnInserirUsuario_Click" />

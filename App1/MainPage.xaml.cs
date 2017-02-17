@@ -158,7 +158,7 @@ namespace App1
             Models.Usuario u = new Models.Usuario
             {
                 Nome = txtNomeUsuario.Text,
-                Senha = txtSenhaUsuario.Text
+                Senha = txtSenhaUsuario.Password.ToString()
             };
             string s = JsonConvert.SerializeObject(u);
             var content = new StringContent(s, Encoding.UTF8, "application/json");
@@ -189,7 +189,7 @@ namespace App1
             Models.Usuario item = (from Models.Usuario f in obj where f.Id == IdUsuario select f).Single();
 
             item.Nome = txtNomeUsuario.Text;
-            item.Senha = txtSenhaUsuario.Text;
+            item.Senha = txtSenhaUsuario.Password.ToString();
 
             var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, "application/json");
             await httpClient.PutAsync("/20131011110142/api/usuario/" + item.Id, content);
@@ -205,7 +205,7 @@ namespace App1
             {
                 var curItem = (Models.Usuario)lstUsuarios.SelectedItem;
                 txtNomeUsuario.Text = curItem.Nome;
-                txtSenhaUsuario.Text = curItem.Senha;
+                txtSenhaUsuario.Password = curItem.Senha;
                 IdUsuario = curItem.Id;
             }
             catch (Exception ex)
